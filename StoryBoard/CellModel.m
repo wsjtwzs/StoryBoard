@@ -30,6 +30,7 @@
     //如果不需要可不写内容 但是该方法不能省略
 }
 
+//使用runtime
 - (id) initWithDic:(NSDictionary *)dic
 {
     if (self = [super init]) {
@@ -116,6 +117,28 @@
     }
     free(mothList_f);
 }
+
+
+//存放时需要对自定义的类编解码
+- (id) initWithCoder:(NSCoder *)aDecoder
+{
+    if (self = [super init]) {
+        self.title = [aDecoder decodeObjectForKey:@"title"];
+        self.subTitle = [aDecoder decodeObjectForKey:@"subtitle"];
+        self.tel = [aDecoder decodeObjectForKey:@"tel"];
+    }
+    return self;
+}
+
+- (void) encodeWithCoder:(NSCoder *)aCoder
+{
+    [aCoder encodeObject:_title forKey:@"title"];
+    [aCoder encodeObject:_subTitle forKey:@"subtitle"];
+    [aCoder encodeObject:_tel forKey:@"tel"];
+}
+
+
+
 
 
 @end
